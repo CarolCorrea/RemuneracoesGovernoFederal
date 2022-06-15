@@ -1,0 +1,2276 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/29/2022 3:12:00 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="CAROL-NOTE"
+  DTS:CreatorName="CAROL-NOTE\Carol"
+  DTS:DTSID="{FCD40E58-8331-4E2B-91B9-74E54EF387CE}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.94"
+  DTS:LocaleID="1046"
+  DTS:ObjectName="Fatos DW"
+  DTS:PackageType="5"
+  DTS:VersionBuild="77"
+  DTS:VersionGUID="{813F0113-9370-4039-9C54-A90635207E77}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Dados Honorarios Adv"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Contêiner da Sequência"
+      DTS:DTSID="{78bae1d3-2fd5-4515-8295-2f6c2228a8a4}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Dados Honorarios Adv">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Tarefa Fluxo de Dados"
+          DTS:DTSID="{833b37b3-e562-40ce-b20f-6554bae50e29}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Gerar Tabela Honorarios Adv"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\Criar Data"
+                  componentClassID="Microsoft.DerivedColumn"
+                  contactInfo="Coluna Derivada;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;0"
+                  description="Cria novos valores de coluna aplicando expressões a colunas de entrada da transformação. Crie novas colunas ou substitua as existentes. Por exemplo, concatene os valores das colunas 'first name' e 'last name' para formar uma coluna 'full name'."
+                  name="Criar Data"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\Criar Data.Inputs[Entrada de Coluna Derivada]"
+                      description="Entrada para a Transformação Coluna Derivada"
+                      name="Entrada de Coluna Derivada">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\Criar Data.Inputs[Entrada de Coluna Derivada].Columns[ANO]"
+                          cachedDataType="i2"
+                          cachedName="ANO"
+                          lineageId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[ANO]" />
+                        <inputColumn
+                          refId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\Criar Data.Inputs[Entrada de Coluna Derivada].Columns[MES]"
+                          cachedDataType="i2"
+                          cachedName="MES"
+                          lineageId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[MES]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\Criar Data.Outputs[Saída de Coluna Derivada]"
+                      description="Saída Padrão da Transformação Coluna Derivada"
+                      exclusionGroup="1"
+                      name="Saída de Coluna Derivada"
+                      synchronousInputId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\Criar Data.Inputs[Entrada de Coluna Derivada]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\Criar Data.Outputs[Saída de Coluna Derivada].Columns[DATA]"
+                          dataType="date"
+                          errorOrTruncationOperation="Computação"
+                          errorRowDisposition="FailComponent"
+                          lineageId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\Criar Data.Outputs[Saída de Coluna Derivada].Columns[DATA]"
+                          name="DATA"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Expressão de Coluna Derivada"
+                              name="Expression">(DT_DATE)((DT_WSTR,4)#{Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[ANO]} + "-" + (DT_WSTR,2)#{Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[MES]} + "-01")</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Expressão Amigável de Coluna Derivada"
+                              expressionType="Notify"
+                              name="FriendlyExpression">(DT_DATE)((DT_WSTR,4)ANO + "-" + (DT_WSTR,2)MES + "-01")</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\Criar Data.Outputs[Saída de Erro de Coluna Derivada]"
+                      description="Saída de Erro da Transformação Coluna Derivada"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Saída de Erro de Coluna Derivada"
+                      synchronousInputId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\Criar Data.Inputs[Entrada de Coluna Derivada]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\Criar Data.Outputs[Saída de Erro de Coluna Derivada].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\Criar Data.Outputs[Saída de Erro de Coluna Derivada].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\Criar Data.Outputs[Saída de Erro de Coluna Derivada].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\Criar Data.Outputs[Saída de Erro de Coluna Derivada].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\HONORARIOS_ADVOCATICIOS"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="Destino OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;4"
+                  description="Destino OLE DB"
+                  name="HONORARIOS_ADVOCATICIOS"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="O tempo em segundos antes que um comando expire. Zero indica uma expiração infinita."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Especifica o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                      name="OpenRowset">[HONORARIOS_ADVOCATICIOS]</property>
+                    <property
+                      dataType="System.String"
+                      description="Especifica a variável que contém o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="O comando SQL a ser executado."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica a página de código de coluna a ser usada quando não há informações de página de código disponíveis a partir da fonte de dados."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forca o uso do valor da propriedade DefaultCodePage durante a descrição dos dados de caractere."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica o modo usado para acessar o banco de dados."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indica se os valores fornecidos para colunas de identidade serão copiados no destino. Se false, os valores para colunas de identidade serão gerados automaticamente no destino. Aplicável apenas se o carregamento rápido estiver ativado."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indica se as colunas que contêm null terão null inserido no destino. Se false, as colunas que contêm null terão seus valores padrão inseridos no destino. Aplicável apenas se o carregamento rápido estiver ativado."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Especifica as opções a serem usadas com o carregamento rápido. Aplicável apenas se o carregamento rápido estiver ativado."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica quando confirmações são emitidas durante a inserção de dados. Um valor de 0 especifica que uma confirmação será emitida ao final da inserção de dados. Aplicável somente se o carregamento rápido estiver ativado."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\HONORARIOS_ADVOCATICIOS.Connections[OleDbConnection]"
+                      connectionManagerID="{CB2C6DF8-E202-4FD8-87C5-4BF68D6E2039}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[CAROL-NOTE.REMUNERACOES_GOV_DW]"
+                      description="A conexão de tempo de execução OLE DB usada para acessar o banco de dados."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\HONORARIOS_ADVOCATICIOS.Inputs[Entrada de Destino OLE DB]"
+                      errorOrTruncationOperation="Inserir"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="Entrada de Destino OLE DB">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\HONORARIOS_ADVOCATICIOS.Inputs[Entrada de Destino OLE DB].Columns[VALOR]"
+                          cachedDataType="r8"
+                          cachedName="VALOR"
+                          externalMetadataColumnId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\HONORARIOS_ADVOCATICIOS.Inputs[Entrada de Destino OLE DB].ExternalColumns[VALOR]"
+                          lineageId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[VALOR]" />
+                        <inputColumn
+                          refId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\HONORARIOS_ADVOCATICIOS.Inputs[Entrada de Destino OLE DB].Columns[DATA]"
+                          cachedDataType="date"
+                          cachedName="DATA"
+                          externalMetadataColumnId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\HONORARIOS_ADVOCATICIOS.Inputs[Entrada de Destino OLE DB].ExternalColumns[DATA]"
+                          lineageId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\Criar Data.Outputs[Saída de Coluna Derivada].Columns[DATA]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\HONORARIOS_ADVOCATICIOS.Inputs[Entrada de Destino OLE DB].ExternalColumns[DATA]"
+                          dataType="dbDate"
+                          name="DATA" />
+                        <externalMetadataColumn
+                          refId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\HONORARIOS_ADVOCATICIOS.Inputs[Entrada de Destino OLE DB].ExternalColumns[VALOR]"
+                          dataType="r8"
+                          name="VALOR" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\HONORARIOS_ADVOCATICIOS.Outputs[Saída de Erro de Destino OLE DB]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Saída de Erro de Destino OLE DB"
+                      synchronousInputId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\HONORARIOS_ADVOCATICIOS.Inputs[Entrada de Destino OLE DB]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\HONORARIOS_ADVOCATICIOS.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\HONORARIOS_ADVOCATICIOS.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\HONORARIOS_ADVOCATICIOS.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\HONORARIOS_ADVOCATICIOS.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\Origem OLE DB"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="Origem OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;7"
+                  description="Origem OLE DB"
+                  name="Origem OLE DB"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="O tempo em segundos antes que um comando expire. Zero indica uma expiração infinita."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Especifica o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                      name="OpenRowset">[dbo].[REMUNERACOES]</property>
+                    <property
+                      dataType="System.String"
+                      description="Especifica a variável que contém o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="O comando SQL a ser executado."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT [ANO]
+      ,[MES]
+      ,SUM([VALOR]) AS 'VALOR'
+  FROM [REMUNERACOES_GOV_STAGE].[dbo].[HONORARIOS_ADVOCATICIOS]
+  GROUP BY [ANO], [MES]</property>
+                    <property
+                      dataType="System.String"
+                      description="A variável que contém o comando SQL a ser executado."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica a página de código de coluna a ser usada quando não há informações de página de código disponíveis a partir da fonte de dados."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forca o uso do valor da propriedade DefaultCodePage durante a descrição dos dados de caractere."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica o modo usado para acessar o banco de dados."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="Os mapeamentos entre os parâmetros no comando SQL e as variáveis."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\Origem OLE DB.Connections[OleDbConnection]"
+                      connectionManagerID="{BD9BFC98-5743-4986-BB0E-4D323E518DBA}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[CAROL-NOTE.REMUNERACOES_GOV_STAGE]"
+                      description="A conexão de tempo de execução OLE DB usada para acessar o banco de dados."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\Origem OLE DB.Outputs[Saída de Origem OLE DB]"
+                      name="Saída de Origem OLE DB">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[ANO]"
+                          dataType="i2"
+                          errorOrTruncationOperation="Conversão"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[ANO]"
+                          lineageId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[ANO]"
+                          name="ANO"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[MES]"
+                          dataType="i2"
+                          errorOrTruncationOperation="Conversão"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[MES]"
+                          lineageId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[MES]"
+                          name="MES"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[VALOR]"
+                          dataType="r8"
+                          errorOrTruncationOperation="Conversão"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[VALOR]"
+                          lineageId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[VALOR]"
+                          name="VALOR"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[ANO]"
+                          dataType="i2"
+                          name="ANO" />
+                        <externalMetadataColumn
+                          refId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[MES]"
+                          dataType="i2"
+                          name="MES" />
+                        <externalMetadataColumn
+                          refId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[VALOR]"
+                          dataType="r8"
+                          name="VALOR" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB]"
+                      isErrorOut="true"
+                      name="Saída de Erro de Origem OLE DB">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[ANO]"
+                          dataType="i2"
+                          lineageId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[ANO]"
+                          name="ANO" />
+                        <outputColumn
+                          refId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[MES]"
+                          dataType="i2"
+                          lineageId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[MES]"
+                          name="MES" />
+                        <outputColumn
+                          refId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[VALOR]"
+                          dataType="r8"
+                          lineageId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[VALOR]"
+                          name="VALOR" />
+                        <outputColumn
+                          refId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv.Paths[Saída de Coluna Derivada]"
+                  endId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\HONORARIOS_ADVOCATICIOS.Inputs[Entrada de Destino OLE DB]"
+                  name="Saída de Coluna Derivada"
+                  startId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\Criar Data.Outputs[Saída de Coluna Derivada]" />
+                <path
+                  refId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv.Paths[Saída de Origem OLE DB]"
+                  endId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\Criar Data.Inputs[Entrada de Coluna Derivada]"
+                  name="Saída de Origem OLE DB"
+                  startId="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\Origem OLE DB.Outputs[Saída de Origem OLE DB]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Dados Honorarios Adv\Truncate Tabela Honorarios Adv"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Tarefa Executar SQL"
+          DTS:DTSID="{623e42ef-69fe-4530-9443-b00860f6f936}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Truncate Tabela Honorarios Adv"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{CB2C6DF8-E202-4FD8-87C5-4BF68D6E2039}"
+              SQLTask:BypassPrepare="False"
+              SQLTask:SqlStatementSource="TRUNCATE TABLE HONORARIOS_ADVOCATICIOS&#xA;GO" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Dados Honorarios Adv.PrecedenceConstraints[Restrição]"
+          DTS:CreationName=""
+          DTS:DTSID="{9090b801-7736-48a5-bc20-83efd038ee7d}"
+          DTS:From="Package\Dados Honorarios Adv\Truncate Tabela Honorarios Adv"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Restrição"
+          DTS:To="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Dados Honorarios Jetons"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Contêiner da Sequência"
+      DTS:DTSID="{ad8eb754-f784-4302-864f-a12645f996e9}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Dados Honorarios Jetons">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Tarefa Fluxo de Dados"
+          DTS:DTSID="{99980702-6171-4974-bc24-2dc54106c78e}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Gerar Tabela Honorarios Jetons"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\Criar Data"
+                  componentClassID="Microsoft.DerivedColumn"
+                  contactInfo="Coluna Derivada;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;0"
+                  description="Cria novos valores de coluna aplicando expressões a colunas de entrada da transformação. Crie novas colunas ou substitua as existentes. Por exemplo, concatene os valores das colunas 'first name' e 'last name' para formar uma coluna 'full name'."
+                  name="Criar Data"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\Criar Data.Inputs[Entrada de Coluna Derivada]"
+                      description="Entrada para a Transformação Coluna Derivada"
+                      name="Entrada de Coluna Derivada">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\Criar Data.Inputs[Entrada de Coluna Derivada].Columns[ANO]"
+                          cachedDataType="i2"
+                          cachedName="ANO"
+                          lineageId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[ANO]" />
+                        <inputColumn
+                          refId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\Criar Data.Inputs[Entrada de Coluna Derivada].Columns[MES]"
+                          cachedDataType="i2"
+                          cachedName="MES"
+                          lineageId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[MES]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\Criar Data.Outputs[Saída de Coluna Derivada]"
+                      description="Saída Padrão da Transformação Coluna Derivada"
+                      exclusionGroup="1"
+                      name="Saída de Coluna Derivada"
+                      synchronousInputId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\Criar Data.Inputs[Entrada de Coluna Derivada]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\Criar Data.Outputs[Saída de Coluna Derivada].Columns[DATA]"
+                          dataType="date"
+                          errorOrTruncationOperation="Computação"
+                          errorRowDisposition="FailComponent"
+                          lineageId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\Criar Data.Outputs[Saída de Coluna Derivada].Columns[DATA]"
+                          name="DATA"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Expressão de Coluna Derivada"
+                              name="Expression">(DT_DATE)((DT_WSTR,4)#{Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[ANO]} + "-" + (DT_WSTR,2)#{Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[MES]} + "-01")</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Expressão Amigável de Coluna Derivada"
+                              expressionType="Notify"
+                              name="FriendlyExpression">(DT_DATE)((DT_WSTR,4)ANO + "-" + (DT_WSTR,2)MES + "-01")</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\Criar Data.Outputs[Saída de Erro de Coluna Derivada]"
+                      description="Saída de Erro da Transformação Coluna Derivada"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Saída de Erro de Coluna Derivada"
+                      synchronousInputId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\Criar Data.Inputs[Entrada de Coluna Derivada]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\Criar Data.Outputs[Saída de Erro de Coluna Derivada].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\Criar Data.Outputs[Saída de Erro de Coluna Derivada].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\Criar Data.Outputs[Saída de Erro de Coluna Derivada].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\Criar Data.Outputs[Saída de Erro de Coluna Derivada].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\HONORARIOS_JETONS"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="Destino OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;4"
+                  description="Destino OLE DB"
+                  name="HONORARIOS_JETONS"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="O tempo em segundos antes que um comando expire. Zero indica uma expiração infinita."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Especifica o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                      name="OpenRowset">[HONORARIOS_JETONS]</property>
+                    <property
+                      dataType="System.String"
+                      description="Especifica a variável que contém o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="O comando SQL a ser executado."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica a página de código de coluna a ser usada quando não há informações de página de código disponíveis a partir da fonte de dados."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forca o uso do valor da propriedade DefaultCodePage durante a descrição dos dados de caractere."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica o modo usado para acessar o banco de dados."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indica se os valores fornecidos para colunas de identidade serão copiados no destino. Se false, os valores para colunas de identidade serão gerados automaticamente no destino. Aplicável apenas se o carregamento rápido estiver ativado."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indica se as colunas que contêm null terão null inserido no destino. Se false, as colunas que contêm null terão seus valores padrão inseridos no destino. Aplicável apenas se o carregamento rápido estiver ativado."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Especifica as opções a serem usadas com o carregamento rápido. Aplicável apenas se o carregamento rápido estiver ativado."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica quando confirmações são emitidas durante a inserção de dados. Um valor de 0 especifica que uma confirmação será emitida ao final da inserção de dados. Aplicável somente se o carregamento rápido estiver ativado."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\HONORARIOS_JETONS.Connections[OleDbConnection]"
+                      connectionManagerID="{CB2C6DF8-E202-4FD8-87C5-4BF68D6E2039}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[CAROL-NOTE.REMUNERACOES_GOV_DW]"
+                      description="A conexão de tempo de execução OLE DB usada para acessar o banco de dados."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\HONORARIOS_JETONS.Inputs[Entrada de Destino OLE DB]"
+                      errorOrTruncationOperation="Inserir"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="Entrada de Destino OLE DB">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\HONORARIOS_JETONS.Inputs[Entrada de Destino OLE DB].Columns[VALOR]"
+                          cachedDataType="r8"
+                          cachedName="VALOR"
+                          externalMetadataColumnId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\HONORARIOS_JETONS.Inputs[Entrada de Destino OLE DB].ExternalColumns[VALOR]"
+                          lineageId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[VALOR]" />
+                        <inputColumn
+                          refId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\HONORARIOS_JETONS.Inputs[Entrada de Destino OLE DB].Columns[DATA]"
+                          cachedDataType="date"
+                          cachedName="DATA"
+                          externalMetadataColumnId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\HONORARIOS_JETONS.Inputs[Entrada de Destino OLE DB].ExternalColumns[DATA]"
+                          lineageId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\Criar Data.Outputs[Saída de Coluna Derivada].Columns[DATA]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\HONORARIOS_JETONS.Inputs[Entrada de Destino OLE DB].ExternalColumns[DATA]"
+                          dataType="dbDate"
+                          name="DATA" />
+                        <externalMetadataColumn
+                          refId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\HONORARIOS_JETONS.Inputs[Entrada de Destino OLE DB].ExternalColumns[VALOR]"
+                          dataType="r8"
+                          name="VALOR" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\HONORARIOS_JETONS.Outputs[Saída de Erro de Destino OLE DB]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Saída de Erro de Destino OLE DB"
+                      synchronousInputId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\HONORARIOS_JETONS.Inputs[Entrada de Destino OLE DB]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\HONORARIOS_JETONS.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\HONORARIOS_JETONS.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\HONORARIOS_JETONS.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\HONORARIOS_JETONS.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\Origem OLE DB"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="Origem OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;7"
+                  description="Origem OLE DB"
+                  name="Origem OLE DB"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="O tempo em segundos antes que um comando expire. Zero indica uma expiração infinita."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Especifica o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                      name="OpenRowset">[dbo].[REMUNERACOES]</property>
+                    <property
+                      dataType="System.String"
+                      description="Especifica a variável que contém o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="O comando SQL a ser executado."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT [ANO]
+      ,[MES]
+      ,SUM([VALOR]) AS 'VALOR'
+  FROM [REMUNERACOES_GOV_STAGE].[dbo].[HONORARIOS_JETONS]
+  GROUP BY [ANO], [MES]</property>
+                    <property
+                      dataType="System.String"
+                      description="A variável que contém o comando SQL a ser executado."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica a página de código de coluna a ser usada quando não há informações de página de código disponíveis a partir da fonte de dados."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forca o uso do valor da propriedade DefaultCodePage durante a descrição dos dados de caractere."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica o modo usado para acessar o banco de dados."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="Os mapeamentos entre os parâmetros no comando SQL e as variáveis."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\Origem OLE DB.Connections[OleDbConnection]"
+                      connectionManagerID="{BD9BFC98-5743-4986-BB0E-4D323E518DBA}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[CAROL-NOTE.REMUNERACOES_GOV_STAGE]"
+                      description="A conexão de tempo de execução OLE DB usada para acessar o banco de dados."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\Origem OLE DB.Outputs[Saída de Origem OLE DB]"
+                      name="Saída de Origem OLE DB">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[ANO]"
+                          dataType="i2"
+                          errorOrTruncationOperation="Conversão"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[ANO]"
+                          lineageId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[ANO]"
+                          name="ANO"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[MES]"
+                          dataType="i2"
+                          errorOrTruncationOperation="Conversão"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[MES]"
+                          lineageId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[MES]"
+                          name="MES"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[VALOR]"
+                          dataType="r8"
+                          errorOrTruncationOperation="Conversão"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[VALOR]"
+                          lineageId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[VALOR]"
+                          name="VALOR"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[ANO]"
+                          dataType="i2"
+                          name="ANO" />
+                        <externalMetadataColumn
+                          refId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[MES]"
+                          dataType="i2"
+                          name="MES" />
+                        <externalMetadataColumn
+                          refId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[VALOR]"
+                          dataType="r8"
+                          name="VALOR" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB]"
+                      isErrorOut="true"
+                      name="Saída de Erro de Origem OLE DB">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[ANO]"
+                          dataType="i2"
+                          lineageId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[ANO]"
+                          name="ANO" />
+                        <outputColumn
+                          refId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[MES]"
+                          dataType="i2"
+                          lineageId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[MES]"
+                          name="MES" />
+                        <outputColumn
+                          refId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[VALOR]"
+                          dataType="r8"
+                          lineageId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[VALOR]"
+                          name="VALOR" />
+                        <outputColumn
+                          refId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons.Paths[Saída de Coluna Derivada]"
+                  endId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\HONORARIOS_JETONS.Inputs[Entrada de Destino OLE DB]"
+                  name="Saída de Coluna Derivada"
+                  startId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\Criar Data.Outputs[Saída de Coluna Derivada]" />
+                <path
+                  refId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons.Paths[Saída de Origem OLE DB]"
+                  endId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\Criar Data.Inputs[Entrada de Coluna Derivada]"
+                  name="Saída de Origem OLE DB"
+                  startId="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\Origem OLE DB.Outputs[Saída de Origem OLE DB]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Dados Honorarios Jetons\Truncate Tabela Honorarios Jetons"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Tarefa Executar SQL"
+          DTS:DTSID="{d4c0e654-d672-462a-8a73-a79131eac9fc}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Truncate Tabela Honorarios Jetons"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{CB2C6DF8-E202-4FD8-87C5-4BF68D6E2039}"
+              SQLTask:BypassPrepare="False"
+              SQLTask:SqlStatementSource="TRUNCATE TABLE HONORARIOS_JETONS&#xA;GO" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Dados Honorarios Jetons.PrecedenceConstraints[Restrição]"
+          DTS:CreationName=""
+          DTS:DTSID="{fb7ac53d-099c-4b87-bbd9-3be7eaed456c}"
+          DTS:From="Package\Dados Honorarios Jetons\Truncate Tabela Honorarios Jetons"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Restrição"
+          DTS:To="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Dados Remuneracoes"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Contêiner da Sequência"
+      DTS:DTSID="{9A980DAF-81E6-4B90-B0AC-29FFF1C34DE6}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Dados Remuneracoes">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Tarefa Fluxo de Dados"
+          DTS:DTSID="{157B1314-A32E-43A0-9EE1-7610F51A9871}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Gerar Tabela Remuneracoes"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Corrigir Valores Negativos"
+                  componentClassID="Microsoft.DerivedColumn"
+                  contactInfo="Coluna Derivada;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;0"
+                  description="Cria novos valores de coluna aplicando expressões a colunas de entrada da transformação. Crie novas colunas ou substitua as existentes. Por exemplo, concatene os valores das colunas 'first name' e 'last name' para formar uma coluna 'full name'."
+                  name="Corrigir Valores Negativos"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Corrigir Valores Negativos.Inputs[Entrada de Coluna Derivada]"
+                      description="Entrada para a Transformação Coluna Derivada"
+                      name="Entrada de Coluna Derivada">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Corrigir Valores Negativos.Inputs[Entrada de Coluna Derivada].Columns[IRRF]"
+                          cachedDataType="r4"
+                          cachedName="IRRF"
+                          errorOrTruncationOperation="Computação"
+                          errorRowDisposition="FailComponent"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[IRRF]"
+                          truncationRowDisposition="FailComponent"
+                          usageType="readWrite">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Expressão de Coluna Derivada"
+                              name="Expression">[ABS](#{Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[IRRF]})</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Expressão Amigável de Coluna Derivada"
+                              expressionType="Notify"
+                              name="FriendlyExpression">ABS(IRRF)</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Corrigir Valores Negativos.Inputs[Entrada de Coluna Derivada].Columns[PSS RPGS]"
+                          cachedDataType="r4"
+                          cachedName="PSS RPGS"
+                          errorOrTruncationOperation="Computação"
+                          errorRowDisposition="FailComponent"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[PSS RPGS]"
+                          truncationRowDisposition="FailComponent"
+                          usageType="readWrite">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Expressão de Coluna Derivada"
+                              name="Expression">[ABS](#{Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[PSS RPGS]})</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Expressão Amigável de Coluna Derivada"
+                              expressionType="Notify"
+                              name="FriendlyExpression">ABS([PSS RPGS])</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Corrigir Valores Negativos.Inputs[Entrada de Coluna Derivada].Columns[DEMAIS DEDUÇÕES]"
+                          cachedDataType="r4"
+                          cachedName="DEMAIS DEDUÇÕES"
+                          errorOrTruncationOperation="Computação"
+                          errorRowDisposition="FailComponent"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[DEMAIS DEDUÇÕES]"
+                          truncationRowDisposition="FailComponent"
+                          usageType="readWrite">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Expressão de Coluna Derivada"
+                              name="Expression">[ABS](#{Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[DEMAIS DEDUÇÕES]})</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Expressão Amigável de Coluna Derivada"
+                              expressionType="Notify"
+                              name="FriendlyExpression">ABS([DEMAIS DEDUÇÕES])</property>
+                          </properties>
+                        </inputColumn>
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Corrigir Valores Negativos.Outputs[Saída de Coluna Derivada]"
+                      description="Saída Padrão da Transformação Coluna Derivada"
+                      exclusionGroup="1"
+                      name="Saída de Coluna Derivada"
+                      synchronousInputId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Corrigir Valores Negativos.Inputs[Entrada de Coluna Derivada]">
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Corrigir Valores Negativos.Outputs[Saída de Erro de Coluna Derivada]"
+                      description="Saída de Erro da Transformação Coluna Derivada"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Saída de Erro de Coluna Derivada"
+                      synchronousInputId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Corrigir Valores Negativos.Inputs[Entrada de Coluna Derivada]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Corrigir Valores Negativos.Outputs[Saída de Erro de Coluna Derivada].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Corrigir Valores Negativos.Outputs[Saída de Erro de Coluna Derivada].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Corrigir Valores Negativos.Outputs[Saída de Erro de Coluna Derivada].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Corrigir Valores Negativos.Outputs[Saída de Erro de Coluna Derivada].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Criar Data, Agrupar Valores"
+                  componentClassID="Microsoft.DerivedColumn"
+                  contactInfo="Coluna Derivada;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;0"
+                  description="Cria novos valores de coluna aplicando expressões a colunas de entrada da transformação. Crie novas colunas ou substitua as existentes. Por exemplo, concatene os valores das colunas 'first name' e 'last name' para formar uma coluna 'full name'."
+                  name="Criar Data, Agrupar Valores"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Criar Data, Agrupar Valores.Inputs[Entrada de Coluna Derivada]"
+                      description="Entrada para a Transformação Coluna Derivada"
+                      name="Entrada de Coluna Derivada">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Criar Data, Agrupar Valores.Inputs[Entrada de Coluna Derivada].Columns[ANO]"
+                          cachedDataType="i2"
+                          cachedName="ANO"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[ANO]" />
+                        <inputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Criar Data, Agrupar Valores.Inputs[Entrada de Coluna Derivada].Columns[MES]"
+                          cachedDataType="i2"
+                          cachedName="MES"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[MES]" />
+                        <inputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Criar Data, Agrupar Valores.Inputs[Entrada de Coluna Derivada].Columns[REMUNERAÇÃO BÁSICA BRUTA]"
+                          cachedDataType="r4"
+                          cachedName="REMUNERAÇÃO BÁSICA BRUTA"
+                          errorOrTruncationOperation="Computação"
+                          errorRowDisposition="FailComponent"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[REMUNERAÇÃO BÁSICA BRUTA]"
+                          truncationRowDisposition="FailComponent"
+                          usageType="readWrite">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Expressão de Coluna Derivada"
+                              name="Expression">#{Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[REMUNERAÇÃO BÁSICA BRUTA]} + #{Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[ABATE-TETO]}</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Expressão Amigável de Coluna Derivada"
+                              expressionType="Notify"
+                              name="FriendlyExpression">[REMUNERAÇÃO BÁSICA BRUTA] + [ABATE-TETO]</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Criar Data, Agrupar Valores.Inputs[Entrada de Coluna Derivada].Columns[ABATE-TETO]"
+                          cachedDataType="r4"
+                          cachedName="ABATE-TETO"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[ABATE-TETO]" />
+                        <inputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Criar Data, Agrupar Valores.Inputs[Entrada de Coluna Derivada].Columns[GRATIFICAÇÃO NATALINA]"
+                          cachedDataType="r4"
+                          cachedName="GRATIFICAÇÃO NATALINA"
+                          errorOrTruncationOperation="Computação"
+                          errorRowDisposition="FailComponent"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[GRATIFICAÇÃO NATALINA]"
+                          truncationRowDisposition="FailComponent"
+                          usageType="readWrite">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Expressão de Coluna Derivada"
+                              name="Expression">#{Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[GRATIFICAÇÃO NATALINA]} + #{Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[ABATE-TETO DA GRATIFICAÇÃO NATALINA]}</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Expressão Amigável de Coluna Derivada"
+                              expressionType="Notify"
+                              name="FriendlyExpression">[GRATIFICAÇÃO NATALINA] + [ABATE-TETO DA GRATIFICAÇÃO NATALINA]</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Criar Data, Agrupar Valores.Inputs[Entrada de Coluna Derivada].Columns[ABATE-TETO DA GRATIFICAÇÃO NATALINA]"
+                          cachedDataType="r4"
+                          cachedName="ABATE-TETO DA GRATIFICAÇÃO NATALINA"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[ABATE-TETO DA GRATIFICAÇÃO NATALINA]" />
+                        <inputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Criar Data, Agrupar Valores.Inputs[Entrada de Coluna Derivada].Columns[DEMAIS DEDUÇÕES]"
+                          cachedDataType="r4"
+                          cachedName="DEMAIS DEDUÇÕES"
+                          errorOrTruncationOperation="Computação"
+                          errorRowDisposition="FailComponent"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[DEMAIS DEDUÇÕES]"
+                          truncationRowDisposition="FailComponent"
+                          usageType="readWrite">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Expressão de Coluna Derivada"
+                              name="Expression">#{Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[DEMAIS DEDUÇÕES]} + #{Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[PENSÃO MILITAR]} + #{Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[FUNDO DE SAÚDE]} + #{Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[TAXA DE OCUPAÇÃO IMÓVEL FUNCIONAL]}</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Expressão Amigável de Coluna Derivada"
+                              expressionType="Notify"
+                              name="FriendlyExpression">[DEMAIS DEDUÇÕES] + [PENSÃO MILITAR] + [FUNDO DE SAÚDE] + [TAXA DE OCUPAÇÃO IMÓVEL FUNCIONAL]</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Criar Data, Agrupar Valores.Inputs[Entrada de Coluna Derivada].Columns[PENSÃO MILITAR]"
+                          cachedDataType="r4"
+                          cachedName="PENSÃO MILITAR"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[PENSÃO MILITAR]" />
+                        <inputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Criar Data, Agrupar Valores.Inputs[Entrada de Coluna Derivada].Columns[FUNDO DE SAÚDE]"
+                          cachedDataType="r4"
+                          cachedName="FUNDO DE SAÚDE"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[FUNDO DE SAÚDE]" />
+                        <inputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Criar Data, Agrupar Valores.Inputs[Entrada de Coluna Derivada].Columns[TAXA DE OCUPAÇÃO IMÓVEL FUNCIONAL]"
+                          cachedDataType="r4"
+                          cachedName="TAXA DE OCUPAÇÃO IMÓVEL FUNCIONAL"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[TAXA DE OCUPAÇÃO IMÓVEL FUNCIONAL]" />
+                        <inputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Criar Data, Agrupar Valores.Inputs[Entrada de Coluna Derivada].Columns[OUTRAS REMUNERAÇÕES EVENTUAIS]"
+                          cachedDataType="r4"
+                          cachedName="OUTRAS REMUNERAÇÕES EVENTUAIS"
+                          errorOrTruncationOperation="Computação"
+                          errorRowDisposition="FailComponent"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[OUTRAS REMUNERAÇÕES EVENTUAIS]"
+                          truncationRowDisposition="FailComponent"
+                          usageType="readWrite">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Expressão de Coluna Derivada"
+                              name="Expression">#{Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[OUTRAS REMUNERAÇÕES EVENTUAIS]} + #{Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[VERBAS INDENIZATÓRIAS]}</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Expressão Amigável de Coluna Derivada"
+                              expressionType="Notify"
+                              name="FriendlyExpression">[OUTRAS REMUNERAÇÕES EVENTUAIS] + [VERBAS INDENIZATÓRIAS]</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Criar Data, Agrupar Valores.Inputs[Entrada de Coluna Derivada].Columns[VERBAS INDENIZATÓRIAS]"
+                          cachedDataType="r4"
+                          cachedName="VERBAS INDENIZATÓRIAS"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[VERBAS INDENIZATÓRIAS]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Criar Data, Agrupar Valores.Outputs[Saída de Coluna Derivada]"
+                      description="Saída Padrão da Transformação Coluna Derivada"
+                      exclusionGroup="1"
+                      name="Saída de Coluna Derivada"
+                      synchronousInputId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Criar Data, Agrupar Valores.Inputs[Entrada de Coluna Derivada]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Criar Data, Agrupar Valores.Outputs[Saída de Coluna Derivada].Columns[DATA]"
+                          dataType="date"
+                          errorOrTruncationOperation="Computação"
+                          errorRowDisposition="FailComponent"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Criar Data, Agrupar Valores.Outputs[Saída de Coluna Derivada].Columns[DATA]"
+                          name="DATA"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Expressão de Coluna Derivada"
+                              name="Expression">(DT_DATE)((DT_WSTR,4)#{Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[ANO]} + "-" + (DT_WSTR,2)#{Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[MES]} + "-01")</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Expressão Amigável de Coluna Derivada"
+                              expressionType="Notify"
+                              name="FriendlyExpression">(DT_DATE)((DT_WSTR,4)ANO + "-" + (DT_WSTR,2)MES + "-01")</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Criar Data, Agrupar Valores.Outputs[Saída de Erro de Coluna Derivada]"
+                      description="Saída de Erro da Transformação Coluna Derivada"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Saída de Erro de Coluna Derivada"
+                      synchronousInputId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Criar Data, Agrupar Valores.Inputs[Entrada de Coluna Derivada]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Criar Data, Agrupar Valores.Outputs[Saída de Erro de Coluna Derivada].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Criar Data, Agrupar Valores.Outputs[Saída de Erro de Coluna Derivada].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Criar Data, Agrupar Valores.Outputs[Saída de Erro de Coluna Derivada].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Criar Data, Agrupar Valores.Outputs[Saída de Erro de Coluna Derivada].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="Origem OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;7"
+                  description="Origem OLE DB"
+                  name="Origem OLE DB"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="O tempo em segundos antes que um comando expire. Zero indica uma expiração infinita."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Especifica o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                      name="OpenRowset">[dbo].[REMUNERACOES]</property>
+                    <property
+                      dataType="System.String"
+                      description="Especifica a variável que contém o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="O comando SQL a ser executado."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT DISTINCT [COD_ORG]
+      ,MAX([DESC_ORG]) AS "DESC_ORG"
+      ,MAX([COD_ORGSUP]) AS "COD_ORGSUP"
+  FROM [FOLHA_SALARIAL_GOV_STAGE].[dbo].[ORGAO_SERVIDORES]
+  GROUP BY [COD_ORG]
+  ORDER BY [COD_ORG]</property>
+                    <property
+                      dataType="System.String"
+                      description="A variável que contém o comando SQL a ser executado."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica a página de código de coluna a ser usada quando não há informações de página de código disponíveis a partir da fonte de dados."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forca o uso do valor da propriedade DefaultCodePage durante a descrição dos dados de caractere."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica o modo usado para acessar o banco de dados."
+                      name="AccessMode"
+                      typeConverter="AccessMode">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Os mapeamentos entre os parâmetros no comando SQL e as variáveis."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Connections[OleDbConnection]"
+                      connectionManagerID="{BD9BFC98-5743-4986-BB0E-4D323E518DBA}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[CAROL-NOTE.REMUNERACOES_GOV_STAGE]"
+                      description="A conexão de tempo de execução OLE DB usada para acessar o banco de dados."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB]"
+                      name="Saída de Origem OLE DB">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[ANO]"
+                          dataType="i2"
+                          errorOrTruncationOperation="Conversão"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[ANO]"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[ANO]"
+                          name="ANO"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[MES]"
+                          dataType="i2"
+                          errorOrTruncationOperation="Conversão"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[MES]"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[MES]"
+                          name="MES"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[ID]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversão"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[ID]"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[ID]"
+                          name="ID"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[REMUNERAÇÃO BÁSICA BRUTA]"
+                          dataType="r4"
+                          errorOrTruncationOperation="Conversão"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[REMUNERAÇÃO BÁSICA BRUTA]"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[REMUNERAÇÃO BÁSICA BRUTA]"
+                          name="REMUNERAÇÃO BÁSICA BRUTA"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[ABATE-TETO]"
+                          dataType="r4"
+                          errorOrTruncationOperation="Conversão"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[ABATE-TETO]"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[ABATE-TETO]"
+                          name="ABATE-TETO"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[GRATIFICAÇÃO NATALINA]"
+                          dataType="r4"
+                          errorOrTruncationOperation="Conversão"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[GRATIFICAÇÃO NATALINA]"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[GRATIFICAÇÃO NATALINA]"
+                          name="GRATIFICAÇÃO NATALINA"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[ABATE-TETO DA GRATIFICAÇÃO NATALINA]"
+                          dataType="r4"
+                          errorOrTruncationOperation="Conversão"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[ABATE-TETO DA GRATIFICAÇÃO NATALINA]"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[ABATE-TETO DA GRATIFICAÇÃO NATALINA]"
+                          name="ABATE-TETO DA GRATIFICAÇÃO NATALINA"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[FÉRIAS]"
+                          dataType="r4"
+                          errorOrTruncationOperation="Conversão"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[FÉRIAS]"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[FÉRIAS]"
+                          name="FÉRIAS"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[OUTRAS REMUNERAÇÕES EVENTUAIS]"
+                          dataType="r4"
+                          errorOrTruncationOperation="Conversão"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[OUTRAS REMUNERAÇÕES EVENTUAIS]"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[OUTRAS REMUNERAÇÕES EVENTUAIS]"
+                          name="OUTRAS REMUNERAÇÕES EVENTUAIS"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[IRRF]"
+                          dataType="r4"
+                          errorOrTruncationOperation="Conversão"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[IRRF]"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[IRRF]"
+                          name="IRRF"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[PSS RPGS]"
+                          dataType="r4"
+                          errorOrTruncationOperation="Conversão"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[PSS RPGS]"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[PSS RPGS]"
+                          name="PSS RPGS"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[DEMAIS DEDUÇÕES]"
+                          dataType="r4"
+                          errorOrTruncationOperation="Conversão"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[DEMAIS DEDUÇÕES]"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[DEMAIS DEDUÇÕES]"
+                          name="DEMAIS DEDUÇÕES"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[PENSÃO MILITAR]"
+                          dataType="r4"
+                          errorOrTruncationOperation="Conversão"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[PENSÃO MILITAR]"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[PENSÃO MILITAR]"
+                          name="PENSÃO MILITAR"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[FUNDO DE SAÚDE]"
+                          dataType="r4"
+                          errorOrTruncationOperation="Conversão"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[FUNDO DE SAÚDE]"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[FUNDO DE SAÚDE]"
+                          name="FUNDO DE SAÚDE"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[TAXA DE OCUPAÇÃO IMÓVEL FUNCIONAL]"
+                          dataType="r4"
+                          errorOrTruncationOperation="Conversão"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[TAXA DE OCUPAÇÃO IMÓVEL FUNCIONAL]"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[TAXA DE OCUPAÇÃO IMÓVEL FUNCIONAL]"
+                          name="TAXA DE OCUPAÇÃO IMÓVEL FUNCIONAL"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[REMUNERAÇÃO APÓS DEDUÇÕES OBRIGATÓRIAS]"
+                          dataType="r4"
+                          errorOrTruncationOperation="Conversão"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[REMUNERAÇÃO APÓS DEDUÇÕES OBRIGATÓRIAS]"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[REMUNERAÇÃO APÓS DEDUÇÕES OBRIGATÓRIAS]"
+                          name="REMUNERAÇÃO APÓS DEDUÇÕES OBRIGATÓRIAS"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[VERBAS INDENIZATÓRIAS]"
+                          dataType="r4"
+                          errorOrTruncationOperation="Conversão"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[VERBAS INDENIZATÓRIAS]"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[VERBAS INDENIZATÓRIAS]"
+                          name="VERBAS INDENIZATÓRIAS"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[ANO]"
+                          dataType="i2"
+                          name="ANO" />
+                        <externalMetadataColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[MES]"
+                          dataType="i2"
+                          name="MES" />
+                        <externalMetadataColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[ID]"
+                          dataType="i4"
+                          name="ID" />
+                        <externalMetadataColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[REMUNERAÇÃO BÁSICA BRUTA]"
+                          dataType="r4"
+                          name="REMUNERAÇÃO BÁSICA BRUTA" />
+                        <externalMetadataColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[ABATE-TETO]"
+                          dataType="r4"
+                          name="ABATE-TETO" />
+                        <externalMetadataColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[GRATIFICAÇÃO NATALINA]"
+                          dataType="r4"
+                          name="GRATIFICAÇÃO NATALINA" />
+                        <externalMetadataColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[ABATE-TETO DA GRATIFICAÇÃO NATALINA]"
+                          dataType="r4"
+                          name="ABATE-TETO DA GRATIFICAÇÃO NATALINA" />
+                        <externalMetadataColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[FÉRIAS]"
+                          dataType="r4"
+                          name="FÉRIAS" />
+                        <externalMetadataColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[OUTRAS REMUNERAÇÕES EVENTUAIS]"
+                          dataType="r4"
+                          name="OUTRAS REMUNERAÇÕES EVENTUAIS" />
+                        <externalMetadataColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[IRRF]"
+                          dataType="r4"
+                          name="IRRF" />
+                        <externalMetadataColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[PSS RPGS]"
+                          dataType="r4"
+                          name="PSS RPGS" />
+                        <externalMetadataColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[DEMAIS DEDUÇÕES]"
+                          dataType="r4"
+                          name="DEMAIS DEDUÇÕES" />
+                        <externalMetadataColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[PENSÃO MILITAR]"
+                          dataType="r4"
+                          name="PENSÃO MILITAR" />
+                        <externalMetadataColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[FUNDO DE SAÚDE]"
+                          dataType="r4"
+                          name="FUNDO DE SAÚDE" />
+                        <externalMetadataColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[TAXA DE OCUPAÇÃO IMÓVEL FUNCIONAL]"
+                          dataType="r4"
+                          name="TAXA DE OCUPAÇÃO IMÓVEL FUNCIONAL" />
+                        <externalMetadataColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[REMUNERAÇÃO APÓS DEDUÇÕES OBRIGATÓRIAS]"
+                          dataType="r4"
+                          name="REMUNERAÇÃO APÓS DEDUÇÕES OBRIGATÓRIAS" />
+                        <externalMetadataColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[VERBAS INDENIZATÓRIAS]"
+                          dataType="r4"
+                          name="VERBAS INDENIZATÓRIAS" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB]"
+                      isErrorOut="true"
+                      name="Saída de Erro de Origem OLE DB">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[ANO]"
+                          dataType="i2"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[ANO]"
+                          name="ANO" />
+                        <outputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[MES]"
+                          dataType="i2"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[MES]"
+                          name="MES" />
+                        <outputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[ID]"
+                          dataType="i4"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[ID]"
+                          name="ID" />
+                        <outputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[REMUNERAÇÃO BÁSICA BRUTA]"
+                          dataType="r4"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[REMUNERAÇÃO BÁSICA BRUTA]"
+                          name="REMUNERAÇÃO BÁSICA BRUTA" />
+                        <outputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[ABATE-TETO]"
+                          dataType="r4"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[ABATE-TETO]"
+                          name="ABATE-TETO" />
+                        <outputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[GRATIFICAÇÃO NATALINA]"
+                          dataType="r4"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[GRATIFICAÇÃO NATALINA]"
+                          name="GRATIFICAÇÃO NATALINA" />
+                        <outputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[ABATE-TETO DA GRATIFICAÇÃO NATALINA]"
+                          dataType="r4"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[ABATE-TETO DA GRATIFICAÇÃO NATALINA]"
+                          name="ABATE-TETO DA GRATIFICAÇÃO NATALINA" />
+                        <outputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[FÉRIAS]"
+                          dataType="r4"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[FÉRIAS]"
+                          name="FÉRIAS" />
+                        <outputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[OUTRAS REMUNERAÇÕES EVENTUAIS]"
+                          dataType="r4"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[OUTRAS REMUNERAÇÕES EVENTUAIS]"
+                          name="OUTRAS REMUNERAÇÕES EVENTUAIS" />
+                        <outputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[IRRF]"
+                          dataType="r4"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[IRRF]"
+                          name="IRRF" />
+                        <outputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[PSS RPGS]"
+                          dataType="r4"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[PSS RPGS]"
+                          name="PSS RPGS" />
+                        <outputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[DEMAIS DEDUÇÕES]"
+                          dataType="r4"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[DEMAIS DEDUÇÕES]"
+                          name="DEMAIS DEDUÇÕES" />
+                        <outputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[PENSÃO MILITAR]"
+                          dataType="r4"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[PENSÃO MILITAR]"
+                          name="PENSÃO MILITAR" />
+                        <outputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[FUNDO DE SAÚDE]"
+                          dataType="r4"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[FUNDO DE SAÚDE]"
+                          name="FUNDO DE SAÚDE" />
+                        <outputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[TAXA DE OCUPAÇÃO IMÓVEL FUNCIONAL]"
+                          dataType="r4"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[TAXA DE OCUPAÇÃO IMÓVEL FUNCIONAL]"
+                          name="TAXA DE OCUPAÇÃO IMÓVEL FUNCIONAL" />
+                        <outputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[REMUNERAÇÃO APÓS DEDUÇÕES OBRIGATÓRIAS]"
+                          dataType="r4"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[REMUNERAÇÃO APÓS DEDUÇÕES OBRIGATÓRIAS]"
+                          name="REMUNERAÇÃO APÓS DEDUÇÕES OBRIGATÓRIAS" />
+                        <outputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[VERBAS INDENIZATÓRIAS]"
+                          dataType="r4"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[VERBAS INDENIZATÓRIAS]"
+                          name="VERBAS INDENIZATÓRIAS" />
+                        <outputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\REMUNERACOES"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="Destino OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;4"
+                  description="Destino OLE DB"
+                  name="REMUNERACOES"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="O tempo em segundos antes que um comando expire. Zero indica uma expiração infinita."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Especifica o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                      name="OpenRowset">[dbo].[REMUNERACOES]</property>
+                    <property
+                      dataType="System.String"
+                      description="Especifica a variável que contém o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="O comando SQL a ser executado."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica a página de código de coluna a ser usada quando não há informações de página de código disponíveis a partir da fonte de dados."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forca o uso do valor da propriedade DefaultCodePage durante a descrição dos dados de caractere."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica o modo usado para acessar o banco de dados."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indica se os valores fornecidos para colunas de identidade serão copiados no destino. Se false, os valores para colunas de identidade serão gerados automaticamente no destino. Aplicável apenas se o carregamento rápido estiver ativado."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indica se as colunas que contêm null terão null inserido no destino. Se false, as colunas que contêm null terão seus valores padrão inseridos no destino. Aplicável apenas se o carregamento rápido estiver ativado."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Especifica as opções a serem usadas com o carregamento rápido. Aplicável apenas se o carregamento rápido estiver ativado."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica quando confirmações são emitidas durante a inserção de dados. Um valor de 0 especifica que uma confirmação será emitida ao final da inserção de dados. Aplicável somente se o carregamento rápido estiver ativado."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\REMUNERACOES.Connections[OleDbConnection]"
+                      connectionManagerID="{CB2C6DF8-E202-4FD8-87C5-4BF68D6E2039}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[CAROL-NOTE.REMUNERACOES_GOV_DW]"
+                      description="A conexão de tempo de execução OLE DB usada para acessar o banco de dados."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\REMUNERACOES.Inputs[Entrada de Destino OLE DB]"
+                      errorOrTruncationOperation="Inserir"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="Entrada de Destino OLE DB">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\REMUNERACOES.Inputs[Entrada de Destino OLE DB].Columns[ID]"
+                          cachedDataType="i4"
+                          cachedName="ID"
+                          externalMetadataColumnId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\REMUNERACOES.Inputs[Entrada de Destino OLE DB].ExternalColumns[ID]"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[ID]" />
+                        <inputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\REMUNERACOES.Inputs[Entrada de Destino OLE DB].Columns[IRRF]"
+                          cachedDataType="r4"
+                          cachedName="IRRF"
+                          externalMetadataColumnId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\REMUNERACOES.Inputs[Entrada de Destino OLE DB].ExternalColumns[IRRF]"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[IRRF]" />
+                        <inputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\REMUNERACOES.Inputs[Entrada de Destino OLE DB].Columns[REMUNERAÇÃO BÁSICA BRUTA]"
+                          cachedDataType="r4"
+                          cachedName="REMUNERAÇÃO BÁSICA BRUTA"
+                          externalMetadataColumnId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\REMUNERACOES.Inputs[Entrada de Destino OLE DB].ExternalColumns[REMUNERACAO_BASICA]"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[REMUNERAÇÃO BÁSICA BRUTA]" />
+                        <inputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\REMUNERACOES.Inputs[Entrada de Destino OLE DB].Columns[GRATIFICAÇÃO NATALINA]"
+                          cachedDataType="r4"
+                          cachedName="GRATIFICAÇÃO NATALINA"
+                          externalMetadataColumnId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\REMUNERACOES.Inputs[Entrada de Destino OLE DB].ExternalColumns[GRATIFICACAO_NATALINA]"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[GRATIFICAÇÃO NATALINA]" />
+                        <inputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\REMUNERACOES.Inputs[Entrada de Destino OLE DB].Columns[FÉRIAS]"
+                          cachedDataType="r4"
+                          cachedName="FÉRIAS"
+                          externalMetadataColumnId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\REMUNERACOES.Inputs[Entrada de Destino OLE DB].ExternalColumns[FERIAS]"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[FÉRIAS]" />
+                        <inputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\REMUNERACOES.Inputs[Entrada de Destino OLE DB].Columns[OUTRAS REMUNERAÇÕES EVENTUAIS]"
+                          cachedDataType="r4"
+                          cachedName="OUTRAS REMUNERAÇÕES EVENTUAIS"
+                          externalMetadataColumnId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\REMUNERACOES.Inputs[Entrada de Destino OLE DB].ExternalColumns[OUTRAS_REMUNERACOES]"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[OUTRAS REMUNERAÇÕES EVENTUAIS]" />
+                        <inputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\REMUNERACOES.Inputs[Entrada de Destino OLE DB].Columns[PSS RPGS]"
+                          cachedDataType="r4"
+                          cachedName="PSS RPGS"
+                          externalMetadataColumnId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\REMUNERACOES.Inputs[Entrada de Destino OLE DB].ExternalColumns[PSS_RPGS]"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[PSS RPGS]" />
+                        <inputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\REMUNERACOES.Inputs[Entrada de Destino OLE DB].Columns[DEMAIS DEDUÇÕES]"
+                          cachedDataType="r4"
+                          cachedName="DEMAIS DEDUÇÕES"
+                          externalMetadataColumnId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\REMUNERACOES.Inputs[Entrada de Destino OLE DB].ExternalColumns[OUTRAS_DEDUCOES]"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[DEMAIS DEDUÇÕES]" />
+                        <inputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\REMUNERACOES.Inputs[Entrada de Destino OLE DB].Columns[DATA]"
+                          cachedDataType="date"
+                          cachedName="DATA"
+                          externalMetadataColumnId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\REMUNERACOES.Inputs[Entrada de Destino OLE DB].ExternalColumns[DATA]"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Criar Data, Agrupar Valores.Outputs[Saída de Coluna Derivada].Columns[DATA]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\REMUNERACOES.Inputs[Entrada de Destino OLE DB].ExternalColumns[ID]"
+                          dataType="i4"
+                          name="ID" />
+                        <externalMetadataColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\REMUNERACOES.Inputs[Entrada de Destino OLE DB].ExternalColumns[REMUNERACAO_BASICA]"
+                          dataType="r4"
+                          name="REMUNERACAO_BASICA" />
+                        <externalMetadataColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\REMUNERACOES.Inputs[Entrada de Destino OLE DB].ExternalColumns[GRATIFICACAO_NATALINA]"
+                          dataType="r4"
+                          name="GRATIFICACAO_NATALINA" />
+                        <externalMetadataColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\REMUNERACOES.Inputs[Entrada de Destino OLE DB].ExternalColumns[FERIAS]"
+                          dataType="r4"
+                          name="FERIAS" />
+                        <externalMetadataColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\REMUNERACOES.Inputs[Entrada de Destino OLE DB].ExternalColumns[OUTRAS_REMUNERACOES]"
+                          dataType="r4"
+                          name="OUTRAS_REMUNERACOES" />
+                        <externalMetadataColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\REMUNERACOES.Inputs[Entrada de Destino OLE DB].ExternalColumns[IRRF]"
+                          dataType="r4"
+                          name="IRRF" />
+                        <externalMetadataColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\REMUNERACOES.Inputs[Entrada de Destino OLE DB].ExternalColumns[PSS_RPGS]"
+                          dataType="r4"
+                          name="PSS_RPGS" />
+                        <externalMetadataColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\REMUNERACOES.Inputs[Entrada de Destino OLE DB].ExternalColumns[OUTRAS_DEDUCOES]"
+                          dataType="r4"
+                          name="OUTRAS_DEDUCOES" />
+                        <externalMetadataColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\REMUNERACOES.Inputs[Entrada de Destino OLE DB].ExternalColumns[DATA]"
+                          dataType="dbDate"
+                          name="DATA" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\REMUNERACOES.Outputs[Saída de Erro de Destino OLE DB]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Saída de Erro de Destino OLE DB"
+                      synchronousInputId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\REMUNERACOES.Inputs[Entrada de Destino OLE DB]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\REMUNERACOES.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\REMUNERACOES.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\REMUNERACOES.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\REMUNERACOES.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes.Paths[Saída de Coluna Derivada]"
+                  endId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Corrigir Valores Negativos.Inputs[Entrada de Coluna Derivada]"
+                  name="Saída de Coluna Derivada"
+                  startId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Criar Data, Agrupar Valores.Outputs[Saída de Coluna Derivada]" />
+                <path
+                  refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes.Paths[Saída de Coluna Derivada1]"
+                  endId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\REMUNERACOES.Inputs[Entrada de Destino OLE DB]"
+                  name="Saída de Coluna Derivada"
+                  startId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Corrigir Valores Negativos.Outputs[Saída de Coluna Derivada]" />
+                <path
+                  refId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes.Paths[Saída de Origem OLE DB]"
+                  endId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Criar Data, Agrupar Valores.Inputs[Entrada de Coluna Derivada]"
+                  name="Saída de Origem OLE DB"
+                  startId="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB.Outputs[Saída de Origem OLE DB]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Dados Remuneracoes\Truncate Tabela Remuneracoes"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Tarefa Executar SQL"
+          DTS:DTSID="{BDA8AA32-9E7B-473B-8186-F329E17D219C}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Truncate Tabela Remuneracoes"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="2">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{CB2C6DF8-E202-4FD8-87C5-4BF68D6E2039}"
+              SQLTask:BypassPrepare="False"
+              SQLTask:SqlStatementSource="TRUNCATE TABLE REMUNERACOES&#xA;GO" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Dados Remuneracoes.PrecedenceConstraints[Restrição]"
+          DTS:CreationName=""
+          DTS:DTSID="{CD7D5BBB-5391-4958-B4A1-B5157F453FCD}"
+          DTS:From="Package\Dados Remuneracoes\Truncate Tabela Remuneracoes"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Restrição"
+          DTS:To="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--Esta seção CDATA contém as informações de layout do pacote. A seção inclui informações como coordenadas (x,y), largura e altura.-->
+<!--Se você editar manualmente esta seção e cometer algum erro, poderá excluí-la. -->
+<!--O pacote ainda poderá ser carregado normalmente, mas as informações de layout anteriores serão perdidas e o designer reorganizará automaticamente os elementos na superfície de design.-->
+<Objects
+  Version="8">
+  <!--Cada nó abaixo conterá propriedades que não afetam o comportamento em tempo de execução.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="213.6,41.6"
+          Id="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv"
+          TopLeft="19.3333336777156,89.066667851342" />
+        <NodeLayout
+          Size="228.8,41.6"
+          Id="Package\Dados Honorarios Adv\Truncate Tabela Honorarios Adv"
+          TopLeft="12.000000635783,10.0266672231886" />
+        <EdgeLayout
+          Id="Package\Dados Honorarios Adv.PrecedenceConstraints[Restrição]"
+          TopLeft="126.266667156749,51.6266672231886">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,37.4400006281534"
+              Start="0,0"
+              End="0,29.9400006281534">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.9400006281534" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="248,142.4"
+          Size="248,185.6"
+          Id="Package\Dados Honorarios Adv"
+          TopLeft="268.5333240615,19.2533284954494" />
+        <NodeLayout
+          Size="226.4,41.6"
+          Id="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons"
+          TopLeft="16.0000004768371,90.453334529029" />
+        <NodeLayout
+          Size="240.8,41.6"
+          Id="Package\Dados Honorarios Jetons\Truncate Tabela Honorarios Jetons"
+          TopLeft="8.66666743490435,11.4133339008756" />
+        <EdgeLayout
+          Id="Package\Dados Honorarios Jetons.PrecedenceConstraints[Restrição]"
+          TopLeft="129.133333955871,53.0133339008756">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,37.4400006281534"
+              Start="0,0"
+              End="0,29.9400006281534">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.9400006281534" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="256,142.4"
+          Size="256,185.6"
+          Id="Package\Dados Honorarios Jetons"
+          TopLeft="534.53331349161,20.3733264126246" />
+        <NodeLayout
+          Size="212.8,41.6"
+          Id="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes"
+          TopLeft="18.0000003973642,88.3733345124987" />
+        <NodeLayout
+          Size="227.2,41.6"
+          Id="Package\Dados Remuneracoes\Truncate Tabela Remuneracoes"
+          TopLeft="10.6666673554315,9.33333388434518" />
+        <EdgeLayout
+          Id="Package\Dados Remuneracoes.PrecedenceConstraints[Restrição]"
+          TopLeft="124.333333876397,50.9333338843452">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,37.4400006281534"
+              Start="0,0"
+              End="0,29.9400006281534">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.9400006281534" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="245.6,141.6"
+          Size="245.6,184.8"
+          Id="Package\Dados Remuneracoes"
+          TopLeft="13.2000008742012,19.5199972559611" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="233.6,41.6"
+          Id="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\HONORARIOS_ADVOCATICIOS"
+          TopLeft="39.9999984105429,174.026668049706" />
+        <NodeLayout
+          Size="153.6,41.6"
+          Id="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\Origem OLE DB"
+          TopLeft="83.3333300219643,11.7866667603387" />
+        <NodeLayout
+          Size="125.6,41.6"
+          Id="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\Criar Data"
+          TopLeft="95.3333295451273,92.9066674050229" />
+        <EdgeLayout
+          Id="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv.Paths[Saída de Origem OLE DB]"
+          TopLeft="159.133329783546,53.3866667603387">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,39.5200006446842"
+              Start="0,0"
+              End="0,32.0200006446842">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,32.0200006446842" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv.Paths[Saída de Coluna Derivada]"
+          TopLeft="157.466663977835,134.506667405023">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,39.5200006446835"
+              Start="0,0"
+              End="0,32.0200006446835">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,32.0200006446835" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\HONORARIOS_ADVOCATICIOS">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Dados Honorarios Adv\Gerar Tabela Honorarios Adv\Origem OLE DB">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="196,41.6"
+          Id="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\HONORARIOS_JETONS"
+          TopLeft="55.2,166.4" />
+        <NodeLayout
+          Size="153.6,41.6"
+          Id="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\Origem OLE DB"
+          TopLeft="83.3333300219643,11.7866667603387" />
+        <NodeLayout
+          Size="125.6,41.6"
+          Id="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\Criar Data"
+          TopLeft="92.9333314524758,87.9466673719622" />
+        <EdgeLayout
+          Id="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons.Paths[Saída de Origem OLE DB]"
+          TopLeft="157.93333073722,53.3866667603387">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,34.5600006116235"
+              Start="0,0"
+              End="0,27.0600006116235">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,27.0600006116235" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons.Paths[Saída de Coluna Derivada]"
+          TopLeft="154.466665726238,129.546667371962">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,36.8533326280377"
+              Start="0,0"
+              End="0,29.3533326280377">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.3533326280377" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\HONORARIOS_JETONS">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Dados Honorarios Jetons\Gerar Tabela Honorarios Jetons\Origem OLE DB">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="153.6,41.6"
+          Id="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB"
+          TopLeft="83.3333300219643,11.7866667603387" />
+        <NodeLayout
+          Size="206.4,41.6"
+          Id="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Criar Data, Agrupar Valores"
+          TopLeft="53.7333314524758,88.7466673719622" />
+        <NodeLayout
+          Size="200,41.6"
+          Id="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Corrigir Valores Negativos"
+          TopLeft="56.6666644149357,165.013334644741" />
+        <NodeLayout
+          Size="167.2,41.6"
+          Id="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\REMUNERACOES"
+          TopLeft="70.1333316908943,235.146668446435" />
+        <EdgeLayout
+          Id="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes.Paths[Saída de Origem OLE DB]"
+          TopLeft="158.53333073722,53.3866667603387">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,35.3600006116235"
+              Start="0,0"
+              End="0,27.8600006116235">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,27.8600006116235" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes.Paths[Saída de Coluna Derivada1]"
+          TopLeft="155.199998052915,206.613334644741">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,28.533333801694"
+              Start="0,0"
+              End="0,21.033333801694">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.033333801694" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes.Paths[Saída de Coluna Derivada]"
+          TopLeft="156.799997933706,130.346667371962">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,34.6666672727788"
+              Start="0,0"
+              End="0,27.1666672727788">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,27.1666672727788" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\Origem OLE DB">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Dados Remuneracoes\Gerar Tabela Remuneracoes\REMUNERACOES">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
